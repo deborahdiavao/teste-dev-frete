@@ -1,12 +1,26 @@
-
 class Frete:
-    def __init__(self, peso: float, distancia: float):
-        self.peso = peso
-        self.distancia = distancia
+    def __init__(self, distancia, peso):
+        self._distancia = distancia
+        self._peso = peso
+        self._tipo = None
+        self._valor = 0
 
-    def calcular(self) -> float:
-        valor_base = 5.0
-        valor_por_kg = 2.0
-        valor_por_km = 0.5
+    @property
+    def valor(self):
+        return self._valor
 
-        return valor_base + (self.peso * valor_por_kg) + (self.distancia * valor_por_km)
+    @property
+    def tipo(self):
+        return self._tipo
+
+    @tipo.setter
+    def tipo(self, tipo):
+        self._tipo = tipo
+
+    def calcular_preco(self):
+        if self._tipo == "Normal":
+            self._valor = self._distancia * self._peso + 5
+        elif self._tipo == "Sedex":
+            self._valor = self._distancia * self._peso + 10
+        elif self._tipo == "Sedex10":
+            self._valor = self._distancia * self._peso + 15
